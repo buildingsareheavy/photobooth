@@ -1,6 +1,3 @@
-# Makefile
-# --------
-# Common commands for the photobooth project.
 # Run any command with: make <command>
 # Example: make run
 

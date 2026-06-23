@@ -2,7 +2,7 @@
 
 A Raspberry Pi photobooth that captures photos and prints them to a thermal receipt printer.
 
-Includes a **mock mode** so you can develop and test on your regular computer without any Pi hardware.
+Includes a **dev mode** so you can develop and test on your regular computer without any Pi hardware.
 
 ---
 
@@ -18,8 +18,8 @@ Includes a **mock mode** so you can develop and test on your regular computer wi
 ## Requirements
 
 - Python 3.13 (if using pyenv)
-- A webcam (mock mode only)
-- Linux or macOS (mock mode only)
+- A webcam (dev mode only)
+- Linux or macOS (dev mode only)
 
 ---
 
@@ -101,7 +101,7 @@ make setup-pi
 make run
 ```
 
-> **Mock mode:** On your dev machine the shutter is triggered by spacebar or
+> **dev mode:** On your dev machine the shutter is triggered by spacebar or
 > mouse click. Photos are saved to `./captures/` instead of printing.
 
 ---

@@ -1,7 +1,8 @@
 """
-camera.py
----------
-In mock mode, uses a regular USB or built-in webcam via OpenCV
+Provides camera functionality
+
+Uses OpenCV to capture frames from a USB or built-in webcam and
+convert them to pygame surfaces.
 """
 
 import os
@@ -9,23 +10,23 @@ from datetime import datetime
 import cv2
 import pygame
 import numpy as np
-from config import MOCK_CAMERA_INDEX, CAPTURE_DIR, CAPTURE_PREFIX, CAPTURE_QUALITY
+from config import DEV_CAMERA_INDEX, CAPTURE_DIR, CAPTURE_PREFIX, CAPTURE_QUALITY
 
 
-class MockCamera:
+class DevCamera:
     """
     Webcam-based camera for development on a regular Linux or macOS machine.
     Uses OpenCV to capture frames and converts them to pygame Surfaces.
     """
 
     def __init__(self) -> None:
-        self._cap = cv2.VideoCapture(MOCK_CAMERA_INDEX)
+        self._cap = cv2.VideoCapture(DEV_CAMERA_INDEX)
 
         if not self._cap.isOpened():
             raise RuntimeError(
-                f"Could not open webcam at index {MOCK_CAMERA_INDEX}. "
+                f"Could not open webcam at index {DEV_CAMERA_INDEX}. "
                 "Check that your webcam is connected and try a different index "
-                "in config.py (MOCK_CAMERA_INDEX)."
+                "in config.py (DEV_CAMERA_INDEX)."
             )
 
     def get_frame(self, width: int, height: int) -> pygame.Surface:
@@ -42,7 +43,7 @@ class MockCamera:
         # OpenCV gives us BGR, so convert to RGB
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        # numpy array -> pygame Surface, then scale to display size.
+        # numpy array -> pygame Surface, then scale to display size
         surface = pygame.surfarray.make_surface(np.transpose(frame, (1, 0, 2)))
         return pygame.transform.scale(surface, (width, height))
     
@@ -52,10 +53,7 @@ class MockCamera:
         Returns the path of the saved file.
 
         Uses a timestamp for the filename so photos never overwrite each other:
-            captures/photo_20260623_142301.jpg
-
-        In TypeScript this would be:
-            saveFrame(surface: pygame.Surface): string
+            captures/photo_20260101_XXXXXX.jpg
         """
         os.makedirs(CAPTURE_DIR, exist_ok=True)
 

@@ -1,12 +1,11 @@
 """
-main.py
--------
-Entry point for the photobooth application.
-Run this file to start the photobooth.
+Photobooth application entry point.
+
+Initializes pygame, displays the camera feed, and handles photo capture.
 """
 
 import pygame
-from camera import MockCamera
+from camera import DevCamera
 from config import DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_FPS
 
 
@@ -16,7 +15,7 @@ def main() -> None:
     screen = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
     pygame.display.set_caption("Photobooth")
 
-    camera = MockCamera()
+    camera = DevCamera()
     clock = pygame.time.Clock()
 
     running = True

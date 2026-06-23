@@ -1,7 +1,8 @@
 """
-config.py
----------
-Central configuration for the photobooth
+Application configuration.
+
+Contains display, camera, and image capture settings.
+All user-adjustable settings should be maintained here.
 """
 
 # Display
@@ -15,7 +16,7 @@ CAPTURE_PREFIX: str  = "photo"
 CAPTURE_QUALITY: int = 95 # JPEG quality 0-100
 
 # /dev/video0 = 0, /dev/video1 = 1 etc.
-MOCK_CAMERA_INDEX: int = 0
+DEV_CAMERA_INDEX: int = 0
 
 # Capture Directory
 CAPTURE_DIR: str = "captures"
