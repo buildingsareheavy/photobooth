@@ -21,8 +21,12 @@ COUNTDOWN_FROM: int         = 5
 COUNTDOWN_HOLD_SECS: float  = 1.0
 CAPTURE_FLASH_SECS: float = 1.5
 
+# Fonts
+# Font set to a .ttf path to use a custom font, or empty string for system default
+FONT_COUNTDOWN: str = "" # example: "fonts/Bebas_Neue/BebasNeue-Regular.ttf"
+FONT_SIZE: int      = 280 # pixels
+
 # UI
-FONT_SIZE: int                      = 280               # pixels
 NUMBER_COLOR: tuple[int, int, int]  = (255, 255, 255)   # white
 NUMBER_ALPHA: int                   = 210               # 0-255
 SHADOW_COLOR: tuple[int, int, int]  = (0, 0, 0)         # black

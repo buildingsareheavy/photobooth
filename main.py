@@ -14,10 +14,20 @@ from config import (
     COUNTDOWN_FROM,
     COUNTDOWN_HOLD_SECS,
     FONT_SIZE,
+    FONT_COUNTDOWN,
     CAPTURE_FLASH_SECS,
     FLASH_COLOR
 )
 from ui import draw_countdown
+
+def load_font(path: str, size: int) -> pygame.font.Font:
+    """
+    Loads a custom font from path, or falls back to the system default
+    if path is empty.
+    """
+    if path:
+        return pygame.font.Font(path, size)
+    return pygame.font.SysFont(None, size, bold=True)
 
 
 class State(Enum):
@@ -39,8 +49,9 @@ def main() -> None:
     pygame.display.set_caption("Photobooth")
 
     camera = DevCamera()
-    font = pygame.font.SysFont(None, FONT_SIZE, bold=True)
     clock = pygame.time.Clock()
+    
+    font = load_font(FONT_COUNTDOWN, FONT_SIZE)
 
     state = State.IDLE
 

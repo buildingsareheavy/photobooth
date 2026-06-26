@@ -25,4 +25,8 @@ Thumbs.db
 
 # Env files (in case we add config later)
 .env
-EOF
+
+# Fonts (download separately — see fonts/README.md)
+fonts/**/*.ttf
+fonts/**/*.otf
+
