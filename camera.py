@@ -8,6 +8,7 @@ convert them to pygame surfaces.
 import os
 from datetime import datetime
 import cv2
+from PIL import Image
 import pygame
 import numpy as np
 from config import DEV_CAMERA_INDEX, CAPTURE_DIR, CAPTURE_PREFIX, CAPTURE_QUALITY
@@ -30,11 +31,7 @@ class DevCamera:
             )
 
     def get_frame(self, width: int, height: int) -> pygame.Surface:
-        """
-        Capture a single frame from the webcam and return it as a
-        pygame Surface scaled to dimensions in config.py (DISPLAY_WIDTH and
-        DISPLAY_WIDTH)
-        """
+        """Returns a scaled pygame Surface from the current webcam frame."""
         ret, frame = self._cap.read()
 
         if not ret:
@@ -49,11 +46,9 @@ class DevCamera:
     
     def save_frame(self, surface: pygame.Surface) -> str:
         """
-        Save a pygame Surface as a JPEG to the captures directory.
-        Returns the path of the saved file.
-
-        Uses a timestamp for the filename so photos never overwrite each other:
-            captures/photo_20260101_XXXXXX.jpg
+        Saves surface as a timestamped JPEG to the captures directory.
+        Returns the saved filepath.
+        captures/photo_20260101_XXXXXX.jpg
         """
         os.makedirs(CAPTURE_DIR, exist_ok=True)
 
@@ -63,7 +58,6 @@ class DevCamera:
 
         # Convert pygame Surface → PIL Image → save as JPEG
         raw = pygame.image.tostring(surface, "RGB")
-        from PIL import Image
         image = Image.frombytes("RGB", surface.get_size(), raw)
         image.save(filepath, "JPEG", quality=CAPTURE_QUALITY)
 

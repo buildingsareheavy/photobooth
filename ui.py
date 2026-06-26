@@ -5,6 +5,7 @@ It only draws things, it doesn't handle any logic or state.
 """
 
 import pygame
+
 from config import (
     DISPLAY_WIDTH,
     DISPLAY_HEIGHT,
@@ -27,13 +28,9 @@ def draw_countdown(
     font: pygame.font.Font,
 ) -> None:
     """
-    Draw a single countdown number over the live camera frame.
+    Draws a countdown number over the live camera frame.
 
-    Layers from bottom to top:
-      1. Camera frame (live feed)
-      2. Semi-transparent dark circle (backing shape)
-      3. Drop shadow
-      4. Number
+    Layers: camera frame → dark circle → drop shadow → number.
 
     Args:
         screen:       The main pygame display surface to draw onto.
@@ -64,8 +61,8 @@ def draw_countdown(
     screen.blit(shadow_surface, shadow_surface.get_rect(center=(cx + SHADOW_OFFSET, cy + SHADOW_OFFSET)))
 
     # Layer 4 - the number itself
-    num_surf = font.render(str(number), True, NUMBER_COLOR)
-    num_surf.set_alpha(NUMBER_ALPHA)
-    screen.blit(num_surf, num_surf.get_rect(center=(cx, cy)))
+    num_surface = font.render(str(number), True, NUMBER_COLOR)
+    num_surface.set_alpha(NUMBER_ALPHA)
+    screen.blit(num_surface, num_surface.get_rect(center=(cx, cy)))
 
     pygame.display.flip()
